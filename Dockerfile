@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:alpine
 
 ADD backend /go/src/github.com/app/backend
 WORKDIR /go/src/github.com/app/backend
