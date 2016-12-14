@@ -1,1 +1,3 @@
 .kube/
+frontend/frontend
+backend/backend
