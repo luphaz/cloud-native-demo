@@ -76,7 +76,7 @@ func main() {
 	recorder := zipkin.NewRecorder(collector, false, serviceAddr, "backend")
 	tracer, err = zipkin.NewTracer(recorder, zipkin.TraceID128Bit(true))
 	if err != nil {
-		log.Fatal("unable to create Zipkin tracer: %+v", err)
+		log.Fatalf("unable to create Zipkin tracer: %+v", err)
 	}
 	opentracing.InitGlobalTracer(tracer)
 
