@@ -1,4 +1,5 @@
 FROM scratch
 MAINTAINER Kelsey Hightower <kelsey.hightower@gmail.com>
-ADD backend /backend
+COPY backend /
+
 ENTRYPOINT ["/backend"]

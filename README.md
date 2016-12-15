@@ -9,21 +9,23 @@ Build both go applications for linux :
 Linux build :
 ```
 cd backend
-env GOOS=linux GOARCH=arm go build
+env GOOS=linux GOARCH=amd64 go build
 cd ../frontend
-env GOOS=linux GOARCH=arm go build
+env GOOS=linux GOARCH=amd64 go build
 cd ..
 ```
 
 Powershell build :
 ```
-function golinux {$env:GOOS="linux";$env:GOARCH="arm";go build;$env:GOOS=$null;$env:GOARCH=$null}
+function golinux {$env:GOOS="linux";$env:GOARCH="amd64";go build;$env:GOOS=$null;$env:GOARCH=$null}
 cd backend
 golinux
 cd ../frontend
 golinux
 cd ..
 ```
+
+> Be sure GOARCH correspond to the underlying system you run your container into
 
 ## Build go applications in container
 
