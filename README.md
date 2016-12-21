@@ -31,31 +31,16 @@ cd ..
 
 To avoid installing and configuring go on your machine :
 
-Linux :
 ```
-docker build -t build-backend -f backend/build/Dockerfile backend
-id=$(docker run -d build-backend tail -f /dev/null)
-docker cp $id:/go/bin/app backend/backend
-docker rm -f -v $id
+docker build -t backend-build -f build/Dockerfile --build-arg APP_PATH=backend .
+docker run -d backend-build tail -f /dev/null
+docker cp "$(docker ps -q -f ancestor=backend-build):/go/bin/backend" bin/backend
+docker rm -fv $(docker ps -q -f ancestor=backend-build)
 
-docker build -t build-frontend -f frontend/build/Dockerfile frontend
-id=$(docker run -d build-frontend tail -f /dev/null)
-docker cp $id:/go/bin/app frontend/frontend
-docker rm -f -v $id
-
-```
-
-Powershell :
-```
-docker build -t build-backend -f backend/build/Dockerfile backend
-$id=$(docker run -d build-backend tail -f /dev/null)
-docker cp ${id}:/go/bin/app backend/backend
-docker rm -f -v $id
-
-docker build -t build-frontend -f frontend/build/Dockerfile frontend
-$id=$(docker run -d build-frontend tail -f /dev/null)
-docker cp ${id}:/go/bin/app frontend/frontend
-docker rm -f -v $id
+docker build -t frontend-build -f build/Dockerfile --build-arg APP_PATH=frontend .
+docker run -d frontend-build tail -f /dev/null
+docker cp "$(docker ps -q -f ancestor=frontend-build):/go/bin/frontend" bin/frontend
+docker rm -fv $(docker ps -q -f ancestor=frontend-build)
 
 ```
 
@@ -66,8 +51,8 @@ When once of previous steps has been completed, you can now build final lighweig
 Build both docker containers :
 
 ```
-docker build -t kelseyhightower/backend:1.0.0 .\backend\
+docker build -t kelseyhightower/backend:1.0.0 -f backend/Dockerfile .
 
-docker build -t kelseyhightower/frontend:1.0.0 .\frontend\
+docker build -t kelseyhightower/frontend:1.0.0 -f frontend/Dockerfile .
 
 ```

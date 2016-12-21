@@ -1,4 +1,4 @@
 FROM scratch
 MAINTAINER Kelsey Hightower <kelsey.hightower@gmail.com>
-ADD frontend /frontend
+COPY bin/frontend /frontend
 ENTRYPOINT ["/frontend"]

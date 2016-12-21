@@ -1,0 +1,8 @@
+FROM golang:1.7
+
+RUN mkdir -p /go/src/backend
+WORKDIR /go/src/backend
+
+COPY backend .
+RUN go get -d -v
+RUN env GOOS=linux CGO_ENABLED=0 go build -v -o /go/bin/backend
