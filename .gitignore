@@ -1,3 +1,5 @@
 .kube/
 frontend/frontend
 backend/backend
+bin/frontend
+bin/backend
